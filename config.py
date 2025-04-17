@@ -19,4 +19,4 @@ def get_api_toke_bot():
 
 BOT_TOKEN = get_api_toke_bot()
 
-ADMIT = get_id_admin()
+ADMIN = get_id_admin()

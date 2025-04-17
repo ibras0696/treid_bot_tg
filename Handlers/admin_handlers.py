@@ -1,12 +1,12 @@
 # Обработчик команд
 from aiogram import Router, F, Bot
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
+from treid_bot_tg.Filters.admin_filter import AdminTypeFilter, is_admin_filter
 # Получение Списков Админов
-import dotenv
-import os
+from treid_bot_tg.config import ADMIN
 
 # Функция для проверки по БД
 from treid_bot_tg.Data_base.data_users.users_db import update_user_db, get_user_db
@@ -19,16 +19,10 @@ from treid_bot_tg.States.admin_state import AdminAddDBUser
 
 router = Router()
 
-# Основные Админы
-dotenv.load_dotenv()
-admin_id = os.getenv('ADMIN1')
 
-
-@router.message(Command('admin'))
+@router.message(Command('admin'), is_admin_filter)
 async def admin_cmd(message: Message):
-    user_id = str(message.chat.id)
-    if user_id == admin_id:
-        await message.answer('Добро пожаловать в Админ Панель! ', reply_markup=admin_start_keyboard)
+    await message.answer('Добро пожаловать в Админ Панель! ', reply_markup=admin_start_keyboard)
 
 @router.callback_query(F.data.startswith('admin_'))
 async def get_admin_db(call_back: CallbackQuery):
