@@ -1,5 +1,5 @@
 import sqlite3
-from treid_bot_tg.Data_base.users_db import base_user
+from treid_bot_tg.DataBase.users_db import base_user
 
 USERS = 'users'
 

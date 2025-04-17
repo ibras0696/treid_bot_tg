@@ -5,8 +5,8 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 
 # Функция для работы с БД
-from treid_bot_tg.Data_base.users_db import (check_user_db,
-                                             status_check_user_db)
+from treid_bot_tg.DataBase.users_db import (check_user_db,
+                                            status_check_user_db)
 from treid_bot_tg.Utils.logger import logg_info_admin
 from treid_bot_tg.Utils.message_text.user_text import welcome_message
 from treid_bot_tg.config import ADMIN

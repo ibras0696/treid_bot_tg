@@ -8,7 +8,7 @@ from treid_bot_tg.Filters.admin_filter import is_admin_filter
 # Получение Списков Админов
 
 # Функция для проверки по БД
-from treid_bot_tg.Data_base.users_db import update_user_db, get_user_db
+from treid_bot_tg.DataBase.users_db import update_user_db, get_user_db
 
 # Кнопки
 from treid_bot_tg.Keyboards.admin_keyboard import correct_status_admin_keyboard, admin_start_keyboard

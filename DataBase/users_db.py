@@ -2,7 +2,7 @@ import sqlite3
 from datetime import datetime
 
 # БД
-base_user = './Data_base/data_users.db'
+base_user = './DataBase/data_users.db'
 
 
 async def check_user_db(tg_id: int, status='None'):
