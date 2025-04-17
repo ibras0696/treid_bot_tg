@@ -1,14 +1,15 @@
 # Обработчик команд
-import aiogram
+
 from aiogram import Router, F, Bot
 from aiogram.filters import CommandStart
-from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
 # Функция для работы с БД
 from treid_bot_tg.Data_base.data_users.users_db import (check_user_db,
                                            status_check_user_db)
-from treid_bot_tg.Handlers.admin_handlers import admin_id
+from treid_bot_tg.Utils.logger import logg_info_admin
+from treid_bot_tg.Utils.message_text.user_text import welcome_message
+from treid_bot_tg.config import ADMIN
 
 # Кнопки
 from treid_bot_tg.Keyboards.admin_keyboard import correct_user_keyboard
@@ -33,13 +34,7 @@ async def start_cmd(message: Message):
                              f'\n➕ Выберите нужную волюту для Анализа данных➖',
                              reply_markup=values_keyboards)
     else:
-        await message.answer(f'Приветствую {message.chat.username} '
-                             f'\nВ Бота для Трейдинга и Тех. Анализа Рынка'
-                             f'\nДля того чтоб пользоваться ботом нужно '
-                             f'\nПерейти по Реферальной ссылке и Зарегистрироваться'
-                             f'\nСсылка: https://po-ru3.click/main?utm_campaign=813576&utm_source=affiliate&utm_medium=sr&a=g3HTwlaxNTmPRa&ac=mister-t '
-                             f'\nПосле того Зарегистрируешься'
-                             f'\nНажми подтвердить и Дождись по Администратор тебя примет',
+        await message.answer(text=welcome_message,
                              reply_markup=await correct_status(user_id)
                              )
 
@@ -50,7 +45,7 @@ async def corr_user_cmd(call_back: CallbackQuery, bot: Bot):
     await call_back.message.answer('Ждите подтверждения')
     user_id = call_back.message.chat.id
     username = call_back.message.chat.username
-    await bot.send_message(int(admin_id),
+    await bot.send_message(int(ADMIN),
                            text='Новый пользователь хочет подтверждения'
                                 f'\nID: {user_id}'
                                 f'\nИмя: {username}',
@@ -63,19 +58,20 @@ DATA_VALUE = {}
 
 # Обработка Волют
 @router.callback_query(F.data.startswith('val_'))
-async def value_user_cmd(call_back: CallbackQuery, state: FSMContext):
+async def value_user_cmd(call_back: CallbackQuery, bot: Bot):
     user_id = call_back.message.chat.id
     value_data = call_back.data.replace('val_', '')
     DATA_VALUE[user_id] = value_data
     try:
         await call_back.message.edit_text('⏱ Выбери Временной Интервал ⏱', reply_markup=time_out_keyboards)
-    except Exception:
+    except Exception as ex:
+        await logg_info_admin(log=str(ex), message=call_back.message, bot=bot)
         await call_back.message.answer('Не нужно нажимать кнопки несколько раз !'
                                        '\nПодожди пожалуйста и попробуй чуть позже')
 
 # Обработчик выбора времени
 @router.callback_query(F.data.startswith('time_'))
-async def time_out_cmd(call_back: CallbackQuery):
+async def time_out_cmd(call_back: CallbackQuery, bot: Bot):
     # Получение нужных данных
     user_id = call_back.message.chat.id
     # Время волюты
@@ -132,18 +128,20 @@ async def time_out_cmd(call_back: CallbackQuery):
         await time_message.delete()
 
         await call_back.message.answer(text=new_txt, reply_markup=back_user_button)
-    except Exception:
+    except Exception as ex:
+        await logg_info_admin(log=str(ex), message=call_back.message, bot=bot)
         await call_back.message.answer('Не нужно нажимать кнопки несколько раз !'
                                        '\nПодожди пожалуйста и попробуй чуть позже')
 
 
 @router.callback_query(F.data=='back')
-async def back_user_cmd(call_back: CallbackQuery):
+async def back_user_cmd(call_back: CallbackQuery, bot: Bot):
     try:
         await call_back.message.edit_text(f'⏭︎ Приветствую {call_back.message.chat.username} ⏮︎'
                              f'\n📊 В Бота для Трейдинга и Тех. Анализа Рынка 📊'
                              f'\n➕ Выберите нужную волюту для Анализа данных➖', reply_markup=values_keyboards )
-    except Exception:
+    except Exception as ex:
+        await logg_info_admin(log=str(ex), message=call_back.message, bot=bot)
         await call_back.message.answer('Не нужно нажимать кнопки несколько раз !'
                                    '\nПодожди пожалуйста и попробуй чуть позже')
 

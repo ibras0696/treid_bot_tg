@@ -2,3 +2,6 @@
 # Игнорирование env и .venv
 .venv
 .env
+
+# Игнорирование
+Data_base/data_users/data_users.db

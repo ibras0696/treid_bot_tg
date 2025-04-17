@@ -2,7 +2,8 @@ import asyncio
 from aiogram import  Bot, Dispatcher
 
 
-from Handlers import router
+from treid_bot_tg.Handlers import router
+from treid_bot_tg.Data_base.data_users.models import create_table
 from treid_bot_tg.config import BOT_TOKEN
 
 
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     # Логирование процессов
     # logging.basicConfig(level=logging.INFO)
     try:
+        create_table()
         asyncio.run(main())
     except KeyboardInterrupt:
         print('Выход')

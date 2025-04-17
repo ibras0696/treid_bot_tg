@@ -1,7 +1,7 @@
 from aiogram import Router
 
-from Handlers.user_handler import router as user_router
-from Handlers.admin_handlers import router as admin_router
+from treid_bot_tg.Handlers.user_handler import router as user_router
+from treid_bot_tg.Handlers.admin_handlers import router as admin_router
 
 router = Router()
 
