@@ -7,7 +7,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 
-from Keyboards.Keyboards_all import inline_keyboard_button, inline_keyboard_buttons
+from treid_bot_tg.Keyboards.Keyboards_all import inline_keyboard_button, inline_keyboard_buttons
 
 # Стартовая клавиатура Админа
 admin_start_keyboard = asyncio.run(

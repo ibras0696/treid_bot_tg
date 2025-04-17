@@ -9,13 +9,13 @@ import dotenv
 import os
 
 # Функция для проверки по БД
-from Data_base.data_users.users_db import update_user_db, get_user_db
+from treid_bot_tg.Data_base.data_users.users_db import update_user_db, get_user_db
 
 # Кнопки
-from Keyboards.admin_keyboard import correct_status_admin_keyboard, admin_start_keyboard
+from treid_bot_tg.Keyboards.admin_keyboard import correct_status_admin_keyboard, admin_start_keyboard
 
 # Состояния
-from States.admin_state import AdminAddDBUser
+from treid_bot_tg.States.admin_state import AdminAddDBUser
 
 router = Router()
 

@@ -1,18 +1,17 @@
 import asyncio
-import logging
 import os
-from logging import BASIC_FORMAT
 
 from aiogram import  Bot, Dispatcher
 import dotenv
 
 from Handlers import router
+from treid_bot_tg.config import BOT_TOKEN
 
 
 async def main():
     dotenv.load_dotenv()
     # Бот и подключение к Токен
-    bot = Bot(os.getenv('TOKEN'))
+    bot = Bot(BOT_TOKEN)
     # Основной диспетчер для выполнения команд
     dp = Dispatcher()
     dp.include_router(router)

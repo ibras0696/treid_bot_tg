@@ -6,17 +6,17 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
 # Функция для работы с БД
-from Data_base.data_users.users_db import (check_user_db,
+from treid_bot_tg.Data_base.data_users.users_db import (check_user_db,
                                            status_check_user_db)
-from Handlers.admin_handlers import admin_id
+from treid_bot_tg.Handlers.admin_handlers import admin_id
 
 # Кнопки
-from Keyboards.admin_keyboard import correct_user_keyboard
-from Keyboards.users_keyboards import (correct_status, values_keyboards,
+from treid_bot_tg.Keyboards.admin_keyboard import correct_user_keyboard
+from treid_bot_tg.Keyboards.users_keyboards import (correct_status, values_keyboards,
                                        time_out_keyboards, back_user_button, reverse_dct_value_inverting)
 
 # Функция для трейдинга
-from Parsing.pars_treid import parse_trade_json
+from treid_bot_tg.Parsing.pars_treid import parse_trade_json
 
 router = Router()
 
