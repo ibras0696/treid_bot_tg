@@ -4,4 +4,4 @@
 .env
 
 # Игнорирование
-Data_base/data_users/data_users.db
+Data_base/data_users.db

@@ -3,7 +3,7 @@ from aiogram import  Bot, Dispatcher
 
 
 from treid_bot_tg.Handlers import router
-from treid_bot_tg.Data_base.data_users.models import create_table
+from treid_bot_tg.Data_base.models import create_table
 from treid_bot_tg.config import BOT_TOKEN
 
 
